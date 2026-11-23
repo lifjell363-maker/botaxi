@@ -561,7 +561,7 @@
         if (!res.ok) throw new Error("HTTP " + res.status);
         const remote = await res.json();
         if (remote && remote.rides && remote.bingo) {
-          if (!appState.updatedAt || (remote.updatedAt && remote.updatedAt > appState.updatedAt)) {
+         if (remote.updatedAt && remote.updatedAt !== appState.updatedAt) {
             appState = remote;
             localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
             renderAll();
